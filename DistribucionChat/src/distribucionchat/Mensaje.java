@@ -12,7 +12,8 @@ import java.rmi.RemoteException;
  * @author Juan Leonardo
  */
 public interface Mensaje extends Remote {    
-    void publicar(String mensaje) throws RemoteException;
-    void publicarACliente(String mensaje) throws RemoteException;
+    void publicar(String mensaje, int num) throws RemoteException;
+    void publicarACliente(String mensaje,int num) throws RemoteException;
     void registrar(Mensaje mensajeObj) throws RemoteException;
+    ClienteGUI getGUI()throws RemoteException;
 }

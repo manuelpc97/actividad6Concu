@@ -13,32 +13,43 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ListIterator;
 import java.util.Vector;
 
+public class MensajeImpl extends UnicastRemoteObject implements Mensaje {
 
-
-public class MensajeImpl extends UnicastRemoteObject implements Mensaje {               
     private Vector<Mensaje> clienteObj = null;
-    private ClienteGUI cGUI = null;
-    
+    public ClienteGUI cGUI;
+
     public MensajeImpl() throws RemoteException {
         clienteObj = new Vector<Mensaje>();
     }
+
     public MensajeImpl(ClienteGUI cGUI) throws RemoteException {
         clienteObj = new Vector<Mensaje>();
         this.cGUI = cGUI;
     }
-    public void publicar(String mensaje) throws RemoteException {        
-        System.out.println("Mensaje: " + mensaje);      
-        ListIterator cliOI =clienteObj.listIterator();
+
+    public void publicar(String mensaje, int num) throws RemoteException {
+
+        System.out.println("Mensaje: " + mensaje);
+        ListIterator cliOI = clienteObj.listIterator();
         while (cliOI.hasNext()) {
-            ((Mensaje)cliOI.next()).publicarACliente(mensaje);
-        }            
+            Mensaje m = ((Mensaje) cliOI.next());
+            m.publicarACliente(mensaje, num);
+        }
+
     }
-    
-    public void publicarACliente(String mensaje) throws RemoteException {
-        cGUI.actualizarTexto(mensaje);
+
+    public ClienteGUI getGUI() {
+        return cGUI;
     }
-    
+
+    public void publicarACliente(String mensaje, int num) throws RemoteException {
+        if (num == 0 || cGUI.cliente.id == num) {
+            cGUI.actualizarTexto(mensaje);
+        }
+    }
+
     public void registrar(Mensaje mensajeObj) throws RemoteException {
         clienteObj.add(mensajeObj);
+        this.cGUI = mensajeObj.getGUI();
     }
 }

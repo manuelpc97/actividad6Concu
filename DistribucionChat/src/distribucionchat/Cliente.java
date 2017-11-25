@@ -20,55 +20,61 @@ import java.util.logging.Logger;
  *
  * @author Juan Leonardo
  */
-public class Cliente {    
-    private Mensaje mensaje = null; 
+public class Cliente {
+
+    public int id;
+    public String nombre;
+    private Mensaje mensaje = null;
     private ClienteGUI cGUI = null;
-    
-    Cliente() {}
-    Cliente(ClienteGUI cGUI) {
-        this.cGUI = cGUI;
+
+    Cliente() {
     }
-    
+
+    Cliente(ClienteGUI cGUI, int id, String nombre) {
+        this.cGUI = cGUI;
+        this.id = id;
+        this.nombre = nombre;
+    }
+
     public void iniciar() {
-    try {
-            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);                         
-            mensaje = (Mensaje) myRegistry.lookup("miMensaje");                        
-            if (this.cGUI == null)
-                mensaje.registrar(new MensajeImpl());            
-            else
-                mensaje.registrar(new MensajeImpl(this.cGUI));            
+        try {
+            Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            mensaje = (Mensaje) myRegistry.lookup("miMensaje");
+            System.out.println("Aqui: " + this.cGUI);
+            mensaje.registrar(new MensajeImpl(this.cGUI));
         } catch (RemoteException ex) {
             System.out.println("");
         } catch (NotBoundException ex) {
             System.out.println("");
         }
     }
-    public void enviarMensaje(String mensaje) {
+
+    public void enviarMensaje(String mensaje, int id) {
         try {
-            this.mensaje.publicar(mensaje);
+            String message = this.nombre + ": " + mensaje;
+            this.mensaje.publicar(message, id);
         } catch (RemoteException ex) {
             System.out.println("");
         }
     }
-     
-    private void prueba(){        
-            Scanner scn = new Scanner(System.in);
+
+    private void prueba() {
+        /* Scanner scn = new Scanner(System.in);
             String texto = "";
             while (true) {
                 System.out.print("Ingrese texto: ");                 
                 texto = scn.nextLine();            
                 try {
-                    mensaje.publicar(texto);
+                    //mensaje.publicar(texto);
                 } catch (RemoteException ex) {
                     System.out.println("");
                 }
-            }                           
-    }  
-        
-    public static void main(String[] args) throws RemoteException, NotBoundException {        
-        Cliente cliente = new Cliente();
-        cliente.iniciar();
-        cliente.prueba();
+            } */
     }
-}   
 
+    public static void main(String[] args) throws RemoteException, NotBoundException {
+        /*Cliente cliente = new Cliente();
+        cliente.iniciar();
+        cliente.prueba();*/
+    }
+}
