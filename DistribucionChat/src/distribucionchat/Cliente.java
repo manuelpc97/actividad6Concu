@@ -40,7 +40,6 @@ public class Cliente {
         try {
             Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
             mensaje = (Mensaje) myRegistry.lookup("miMensaje");
-            System.out.println("Aqui: " + this.cGUI);
             mensaje.registrar(new MensajeImpl(this.cGUI));
         } catch (RemoteException ex) {
             System.out.println("");

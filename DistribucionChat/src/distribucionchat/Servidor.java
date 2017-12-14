@@ -35,7 +35,6 @@ public class Servidor {
             try {
                 // Crear el repositorio en el puerto 1099
                 Registry registry = LocateRegistry.createRegistry(1099);
-
                 // Crea un nuevo servicio y lo registra en el repositorio
                 registry.rebind("miMensaje", new MensajeImpl());
             } catch (Exception e) {

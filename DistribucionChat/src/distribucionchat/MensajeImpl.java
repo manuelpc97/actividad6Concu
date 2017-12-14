@@ -28,7 +28,6 @@ public class MensajeImpl extends UnicastRemoteObject implements Mensaje {
     }
 
     public void publicar(String mensaje, int num) throws RemoteException {
-
         System.out.println("Mensaje: " + mensaje);
         ListIterator cliOI = clienteObj.listIterator();
         while (cliOI.hasNext()) {

@@ -21,9 +21,9 @@ public class ClienteGUI extends javax.swing.JFrame {
         cliente = new Cliente(this,i,n);
         cliente.iniciar();
         initComponents(); 
-        this.jLabel1.setText("Cliente: " + cliente.nombre + "; ID: " + cliente.id);
-        this.pack();
-        this.setVisible(true);
+        //this.jLabel1.setText("Cliente: " + cliente.nombre + "; ID: " + cliente.id);
+        //this.pack();
+        //this.setVisible(true);
     }
 
     /**

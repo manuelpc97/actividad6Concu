@@ -67,9 +67,19 @@ public class Control extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        this.server.contador++;
-        ClienteGUI gui = new ClienteGUI(this.server.contador, this.jTextField1.getText());
-        this.server.lista.add(new Cliente(gui,this.server.contador, this.jTextField1.getText()));
+        boolean exist = false;
+        for (int i = 0; i < server.lista.size(); i++) {
+            if (this.jTextField1.getText().equals(server.lista.get(i).nombre)) {
+                exist = true;
+            }
+        }
+        if (!exist) {
+            this.server.contador++;
+            ClienteGUI gui = new ClienteGUI(this.server.contador, this.jTextField1.getText());
+            this.server.lista.add(new Cliente(gui, this.server.contador, this.jTextField1.getText()));
+        } else {
+            System.out.println("Este nombre ya existe");
+        }
         this.jTextField1.setText("");
     }//GEN-LAST:event_jButton1MouseClicked
 
