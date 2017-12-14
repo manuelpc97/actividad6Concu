@@ -27,7 +27,7 @@ public class Servidor {
         ArrayList<Cliente> lista = new ArrayList();
         Control control = new Control();
         int contador = 0;
-
+        Cliente cliente=new Cliente();
         public Server() {
         }
         

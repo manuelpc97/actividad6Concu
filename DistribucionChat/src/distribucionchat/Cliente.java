@@ -26,12 +26,13 @@ public class Cliente {
     public String nombre;
     private Mensaje mensaje = null;
     private ClienteGUI cGUI = null;
-
+    public  String password;
     Cliente() {
     }
 
-    Cliente(ClienteGUI cGUI, int id, String nombre) {
+    Cliente(ClienteGUI cGUI, int id, String nombre, String password) {
         this.cGUI = cGUI;
+        this.password=password;
         this.id = id;
         this.nombre = nombre;
     }
@@ -76,4 +77,5 @@ public class Cliente {
         cliente.iniciar();
         cliente.prueba();*/
     }
+    
 }
